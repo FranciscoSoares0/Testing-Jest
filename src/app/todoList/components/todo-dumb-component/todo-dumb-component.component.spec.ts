@@ -36,16 +36,16 @@ describe('TodoDumbComponentComponent', () => {
       expect(emptyMessage).toBeTruthy();
     });
 
-    it('should not render empty if there are todos', () => {
+    it('should render todos label', () => {
       const testData: Todo[] = [{ id: 1, todo: 'Test Todo', completed: false, userId:1 }];
       fixture.componentRef.setInput('todos', testData);
 
       fixture.detectChanges();
 
       const emptyMessage = fixture.debugElement.query(
-        By.css('[data-testid="no-todos-message"]')
+        By.css('[data-testid="todos-header"]')
       );
-      expect(emptyMessage).toBeFalsy();
+      expect(emptyMessage).toBeTruthy();
     });
   });
 
