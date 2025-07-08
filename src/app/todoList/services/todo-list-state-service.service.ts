@@ -13,6 +13,10 @@ export class TodoListStateServiceService {
     this.todosSig.set(todosResponse.todos);
   }
 
+  addTodo(todo: Todo) {
+    this.todosSig.update(currentTodos => [...currentTodos, todo]);
+  }
+
   deleteTodo(todoId: number) {
     this.todosSig.update(currentTodos => currentTodos.filter(todo => todo.id !== todoId));
   }

@@ -3,15 +3,15 @@ import { TodoListStateServiceService } from '../../services/todo-list-state-serv
 import { TodoListApiServiceService } from '../../services/todo-list-api-service.service';
 import { TodoDumbComponentComponent } from '../todo-dumb-component/todo-dumb-component.component';
 import { CommonModule } from '@angular/common';
+import { AddTodoDumbComponentComponent } from '../add-todo-dumb-component/add-todo-dumb-component.component';
 
 @Component({
   selector: 'app-todo-smart-component',
-  imports: [TodoDumbComponentComponent,CommonModule],
+  imports: [TodoDumbComponentComponent, AddTodoDumbComponentComponent, CommonModule],
   templateUrl: './todo-smart-component.component.html',
-  styleUrl: './todo-smart-component.component.css'
+  styleUrl: './todo-smart-component.component.css',
 })
-export class TodoSmartComponentComponent implements OnInit{
-
+export class TodoSmartComponentComponent implements OnInit {
   private readonly todoListApiService = inject(TodoListApiServiceService);
   private readonly todoListStateService = inject(TodoListStateServiceService);
 
@@ -25,7 +25,24 @@ export class TodoSmartComponentComponent implements OnInit{
       },
       error: (error) => {
         console.error('Error fetching todos:', error);
-      }
+      },
+    });
+  }
+
+  onAddTodo(title: string) {
+    const newTodo = {
+      todo: title,
+      completed: false,
+      userId: 1
+    }
+    this.todoListApiService.addTodo(newTodo).subscribe({
+      next: (addedTodo) => {
+        console.log('Added todo:', addedTodo);
+        this.todoListStateService.addTodo(addedTodo);
+      },
+      error: (error) => {
+        console.error('Error adding todo:', error);
+      },
     });
   }
 
@@ -37,7 +54,7 @@ export class TodoSmartComponentComponent implements OnInit{
       },
       error: (error) => {
         console.error('Error deleting todo:', error);
-      }
-  });
+      },
+    });
   }
 }

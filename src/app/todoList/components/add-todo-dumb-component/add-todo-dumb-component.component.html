@@ -1,0 +1,10 @@
+<form (submit)="addTodo($event)" data-testid="add-todo-form">
+  <input
+    data-testid="add-todo-input"
+    type="text"
+    [value]="title()"
+    (input)="handleInput($event)"
+    placeholder="Enter todo title"
+  />
+  <button type="submit" data-testid="add-todo-submit-button">Add Todo</button>
+</form>
