@@ -15,6 +15,10 @@ export class TodoListApiServiceService {
     return this.http.get<GetTodoResponse>(`https://dummyjson.com/todos`);
   }
 
+  addTodo(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(`https://dummyjson.com/todos/add`, todo);
+  }
+
   deleteTodo(todoId : number): Observable<Todo> {
     return this.http.delete<Todo>(`https://dummyjson.com/todos/${todoId}`);
   }

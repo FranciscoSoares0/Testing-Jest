@@ -47,6 +47,20 @@ describe('TodoListApiServiceService', () => {
     req.flush(mockTodos);
   });
 
+  it('should add a todo', () => {
+    const newTodo = { todo: 'New Todo', completed: false, userId: 1 };
+    const mockResponse = { id: 1, ...newTodo };
+
+    service.addTodo(newTodo).subscribe(todo => {
+      expect(todo).toEqual(mockResponse);
+    });
+
+    const req = httpMock.expectOne('https://dummyjson.com/todos/add');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(newTodo);
+    req.flush(mockResponse);
+  });
+
   it('should delete a todo', () => {
     const todoId = 1;
     const mockResponse = { id: todoId, todo: 'Deleted Todo', completed: false, userId: 1 };
