@@ -17,6 +17,12 @@ export class TodoListStateServiceService {
     this.todosSig.update(currentTodos => [...currentTodos, todo]);
   }
 
+  updateTodo(updatedTodo: Todo) {
+    this.todosSig.update(currentTodos => 
+      currentTodos.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo)
+    );
+  }
+
   deleteTodo(todoId: number) {
     this.todosSig.update(currentTodos => currentTodos.filter(todo => todo.id !== todoId));
   }

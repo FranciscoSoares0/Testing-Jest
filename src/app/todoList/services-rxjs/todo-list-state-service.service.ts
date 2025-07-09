@@ -17,6 +17,13 @@ export class TodoListStateServiceService {
     this.todos$.next([...this.todos$.getValue(), todo]);
   }
 
+  updateTodo(updatedTodo: Todo): void {
+    const updatedTodos = this.todos$.getValue().map((todo) => {
+      return todo.id === updatedTodo.id ? updatedTodo : todo;
+    });
+    this.todos$.next(updatedTodos);
+  }
+
   removeTodo(todoId: number): void {
     const updatedTodos = this.todos$
       .getValue()

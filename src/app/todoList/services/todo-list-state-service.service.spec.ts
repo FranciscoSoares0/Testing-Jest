@@ -33,6 +33,24 @@ describe('TodoListStateServiceService', () => {
     expect(service.todosSig()).toEqual(mockTodos);
   });
 
+  it('should add a todo using addTodo()', () => {
+    service.setTodos(mockResponse);
+    const newTodo: Todo = { id: 3, todo: 'New Todo', completed: false, userId: 1 };
+    service.addTodo(newTodo);
+    const currentTodos = service.todosSig();
+    expect(currentTodos.length).toBe(3);
+    expect(currentTodos[2]).toEqual(newTodo);
+  });
+
+  it('should update a todo using updateTodo()', () => {
+    service.setTodos(mockResponse);
+    const updatedTodo: Todo = { id: 1, todo: 'Updated Todo 1', completed: true, userId: 1 };
+    service.updateTodo(updatedTodo);
+    const currentTodos = service.todosSig();
+    expect(currentTodos.length).toBe(2);
+    expect(currentTodos[0]).toEqual(updatedTodo);
+  });
+
   it('should delete a todo by id using deleteTodo()', () => {
     service.setTodos(mockResponse);
     service.deleteTodo(1);

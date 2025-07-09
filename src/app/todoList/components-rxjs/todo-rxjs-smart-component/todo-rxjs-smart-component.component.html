@@ -1,0 +1,3 @@
+<h2 data-test="page-title">List of Todos RxJS</h2>
+<app-add-todo-dumb-component (submitTitle)="onAddTodo($event)"></app-add-todo-dumb-component>
+<app-todo-rxjs-dumb-component *ngIf="todos$ | async as todos" [todos]="todos" (deleteTodo)="onDeleteTodo($event)"></app-todo-rxjs-dumb-component>

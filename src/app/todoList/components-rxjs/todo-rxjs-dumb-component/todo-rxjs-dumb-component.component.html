@@ -1,0 +1,13 @@
+@if(todos().length > 0){
+<h3 appHighlightDirective highlightColor="green" data-testid="todos-header">Todos</h3>
+  <ul>
+  @for(todo of todos(); track todo.id) {
+    <li>
+      <span>{{ todo.todo }}</span> - <span data-testid="delete-todo" (click)="deleteTodo.emit(todo.id!)" style="cursor:pointer; color:red;">x</span>
+    </li>
+   }
+</ul>
+}
+@else{
+  <h3 data-testid="no-todos-message">No todos to show</h3>
+}
