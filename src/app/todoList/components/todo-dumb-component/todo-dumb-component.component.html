@@ -3,7 +3,17 @@
   <ul>
   @for(todo of todos(); track todo.id) {
     <li>
-      <span>{{ todo.todo }}</span> - <span data-testid="delete-todo" (click)="deleteTodo.emit(todo.id!)" style="cursor:pointer; color:red;">x</span>
+      @if(todo.completed){
+        <span>✅</span>
+      }
+      <span>{{ todo.todo }}</span> - <span data-testid="complete-todo" (click)="completeTodo.emit(todo.id!)" style="cursor:pointer; color:blue;">
+        @if(!todo.completed){
+          Complete Task
+        }
+        @else{
+          Undo Task
+        }
+      </span> - <span data-testid="delete-todo" (click)="deleteTodo.emit(todo.id!)" style="cursor:pointer; color:red;">x</span>
     </li>
    }
 </ul>

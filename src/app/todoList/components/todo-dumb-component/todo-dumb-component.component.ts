@@ -14,4 +14,6 @@ export class TodoDumbComponentComponent {
   todos = input<Todo[]>([]);
 
   deleteTodo = output<number>();
+
+  completeTodo = output<number>();
 }

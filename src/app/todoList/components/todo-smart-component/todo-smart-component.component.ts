@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { TodoListStateServiceService } from '../../services/todo-list-state-service.service';
 import { TodoListApiServiceService } from '../../services/todo-list-api-service.service';
 import { TodoDumbComponentComponent } from '../todo-dumb-component/todo-dumb-component.component';
@@ -45,7 +45,19 @@ export class TodoSmartComponentComponent implements OnInit {
       },
     });
   }
-
+  
+  onCompleteTodo(todoId: number) {
+    const todo = this.todosSig().find(todo => todo.id === todoId);
+    this.todoListApiService.completeTodo(todoId, !todo?.completed).subscribe({
+      next: (completedTodo) => {
+        console.log('Completed todo:', completedTodo);
+        this.todoListStateService.completeTodo(todoId, !todo?.completed);
+      },
+      error: (error) => {
+        console.error('Error completing todo:', error);
+      },
+    });
+  }
   onDeleteTodo(todoId: number) {
     this.todoListApiService.deleteTodo(todoId).subscribe({
       next: (deletedTodo) => {

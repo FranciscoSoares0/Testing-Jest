@@ -17,9 +17,9 @@ export class TodoListStateServiceService {
     this.todosSig.update(currentTodos => [...currentTodos, todo]);
   }
 
-  updateTodo(updatedTodo: Todo) {
+  completeTodo(todoId: number, completed: boolean) {
     this.todosSig.update(currentTodos => 
-      currentTodos.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo)
+      currentTodos.map(todo => todo.id === todoId ? { ...todo, completed } : todo)
     );
   }
 

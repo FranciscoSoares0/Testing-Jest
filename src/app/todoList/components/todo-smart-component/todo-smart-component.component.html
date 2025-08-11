@@ -1,3 +1,3 @@
 <h2 data-test="page-title">List of Todos</h2>
 <app-add-todo-dumb-component (submitTitle)="onAddTodo($event)"></app-add-todo-dumb-component>
-<app-todo-dumb-component *ngIf="todosSig() as todos" [todos]="todos" (deleteTodo)="onDeleteTodo($event)"></app-todo-dumb-component>
+<app-todo-dumb-component *ngIf="todosSig() as todos" [todos]="todos" (deleteTodo)="onDeleteTodo($event)" (completeTodo)="onCompleteTodo($event)"></app-todo-dumb-component>

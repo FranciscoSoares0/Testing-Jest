@@ -19,6 +19,13 @@ export class TodoListApiServiceService {
     return this.http.post<Todo>(`https://dummyjson.com/todos/add`, todo);
   }
 
+  completeTodo(todoId : number, completed : boolean): Observable<Todo> {
+    const completedTodo = {
+      completed: completed
+    }
+    return this.http.put<Todo>(`https://dummyjson.com/todos/${todoId}`, completedTodo);
+  }
+
   deleteTodo(todoId : number): Observable<Todo> {
     return this.http.delete<Todo>(`https://dummyjson.com/todos/${todoId}`);
   }
