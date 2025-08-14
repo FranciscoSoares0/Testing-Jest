@@ -9,8 +9,6 @@ import { Todo } from '../../interfaces/todo';
 })
 export class TodoRxjsDumbComponentComponent {
 
-  //
-
   todos = input<Todo[]>([]);
   
   deleteTodo = output<number>();
